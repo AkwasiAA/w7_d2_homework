@@ -36,7 +36,7 @@ describe('Calculator', () => {
     const button7 = container.find('#number7');
     const button4 = container.find('#number4');
     const subtract = container.find('#operator-subtract');
-    const equals = container.find('#operator-equals')
+    const equals = container.find('#operator-equals');
     const runningTotal = container.find('#running-total');
 
     button7.simulate('click');
@@ -92,5 +92,50 @@ describe('Calculator', () => {
     button9.simulate('click');
     button3.simulate('click');
     expect(runningTotal.text()).toEqual('241093');
+  })
+
+  it('should chain multiple operations together', () => {
+    const button2 = container.find('#number2');
+    const button4 = container.find('#number4');
+    const button1 = container.find('#number1');
+    const button5 = container.find('#number5');
+    const button9 = container.find('#number9');
+    const divide = container.find('#operator-divide');
+    const multiply = container.find('#operator-multiply');
+    const add = container.find('#operator_add');
+    const subtract = container.find('#operator-subtract');
+    const equals = container.find('#operator-equals');
+    const runningTotal = container.find('#running-total');
+
+    button2.simulate('click');
+    add.simulate('click');
+    button4.simulate('click');
+    subtract.simulate('click');
+    button1.simulate('click');
+    divide.simulate('click');
+    button5.simulate('click');
+    multiply.simulate('click');
+    button9.simulate('click');
+    equals.simulate('click');
+    expect(runningTotal.text()).toEqual('9');
+  })
+
+  it('should clear the running total without affecting calc', () => {
+    const button6 = container.find('#number6');
+    const button8 = container.find('#number8');
+    const button2 = container.find('#number2');
+    const add = container.find('#operator_add');
+    const clear = container.find('#clear');
+    const equals = container.find('#operator-equals');
+    const runningTotal = container.find('#running-total');
+
+    button6.simulate('click');
+    add.simulate('click');
+    button8.simulate('click');
+    clear.simulate('click');
+    add.simulate('click');
+    button2.simulate('click');
+    equals.simulate('click');
+    expect(runningTotal.text()).toEqual('8');
   })
 })
